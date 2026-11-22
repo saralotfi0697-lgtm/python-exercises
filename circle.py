@@ -14,9 +14,9 @@ class Circle:
         self._radius=value
     @property
     def area(self):
-        return self._radius*self._radius*3
+        return self._radius*self._radius*3.14
 c=Circle(1)
-c.radius=3
+c.radius=4
 print(c.area)
 print(c)
 

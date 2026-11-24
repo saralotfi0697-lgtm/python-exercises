@@ -8,6 +8,8 @@ class Task:
     def from_string(cls,text):
         title,is_done=text.split(',')
         return cls(title.strip(),is_done.strip()=='True')
+    def __eq__(self, other):
+       return self.title==other.title
     
 
 class TodoList:
@@ -38,6 +40,15 @@ class TodoList:
                     print(f'"{title}" is already done!')
         if found==False:
          print(f'"{title}" not found!')
+    def __len__(self):
+        return len(self.tasks)
+    def __contains__(self, title):
+        for i in self.tasks:
+          if i.title==title:
+            return True
+        return False
+    def __getitem__(self, key):
+        return self.tasks[key]
 t1=Task.from_string('read a newspaper   ,   True   ')
 print(t1.title)
 print(t1.is_done)
@@ -53,9 +64,14 @@ t.mark_done('sleep')
 t.mark_done('learn python')
 t.show_tasks()
 
-
-
+print(len(t))
+b=Task('read a book')
+c=Task('read as book')
+print(b==c)
+print('read a book' in t)
+print(t[0].title)
 t=TodoList()
+
 try:
   t.add_task('gg')
 except ValueError as e:
